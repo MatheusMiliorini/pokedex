@@ -11,7 +11,7 @@ export default {
       const res = await axios.get<PokeApiResponse>(BASE_URL + "pokemon", {
         params: {
           limit: SEARCH_LIMIT,
-          offset: (offset || 0) * SEARCH_LIMIT,
+          offset: offset || 0,
         },
       });
       const pokemons: PokemonData[] = [];

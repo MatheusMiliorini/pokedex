@@ -21,7 +21,12 @@ const typeColors = {
 </script>
 
 <template>
-  <div class="type" :style="{ backgroundColor: typeColors[props.type.name] }">
+  <div
+    class="type"
+    :style="{
+      backgroundColor: typeColors[props.type.name] || typeColors['default'],
+    }"
+  >
     {{ props.type.name.toUpperCase() }}
   </div>
 </template>
