@@ -23,17 +23,24 @@ searchPokemon();
 
 <template>
   <div class="row">
-    <div class="col-md-10 offset-md-1">
+    <div class="col-12 col-md-10 offset-md-1">
       <div class="row">
-        <input
-          type="text"
-          v-model="search"
-          placeholder="Pesquise por nome ou código"
-          class="form-control rounded-input"
-        />
+        <div class="col-12">
+          <input
+            type="text"
+            v-model="search"
+            placeholder="Pesquise por nome ou código"
+            class="form-control rounded-input"
+            id="input-search"
+          />
+        </div>
       </div>
       <div class="row">
-        <div class="col-md-3" v-for="pokemon in pokemonList" :key="pokemon.id">
+        <div
+          class="col-6 col-md-3"
+          v-for="pokemon in pokemonList"
+          :key="pokemon.id"
+        >
           <pokemon-card :pokemon="pokemon" />
         </div>
       </div>
@@ -44,5 +51,9 @@ searchPokemon();
 <style scoped>
 .rounded-input {
   border-radius: 50px;
+}
+
+#input-search::placeholder {
+  color: lightgrey;
 }
 </style>
