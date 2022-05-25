@@ -23,8 +23,14 @@ const searchPokemon = async () => {
 };
 searchPokemon();
 
-const goToPokemon = () => {
-  router.push(`/${search.value}`);
+const clearSearch = () => {
+  search.value = "";
+};
+
+const goToPokemon = (e?: KeyboardEvent) => {
+  if (!e || e.key === "Enter" || e.keyCode === 13) {
+    router.push(`/${search.value}`);
+  }
 };
 
 const handleScroll = async ({
@@ -44,14 +50,25 @@ const handleScroll = async ({
     <div class="col-12 col-md-10 offset-md-1">
       <div class="row">
         <div class="col-12">
-          <input
-            type="text"
-            v-model="search"
-            placeholder="Pesquise por nome ou código"
-            class="form-control rounded-input"
-            id="input-search"
-            @change="goToPokemon"
-          />
+          <div class="input-with-icon">
+            <i
+              class="fa fa-search mobile-only"
+              aria-hidden="true"
+              @click="() => goToPokemon()"
+            ></i>
+            <input
+              type="text"
+              v-model="search"
+              placeholder="Pesquise por nome ou código"
+              id="input-search"
+              @keyup="goToPokemon"
+            />
+            <i
+              @click="clearSearch"
+              class="fa fa-times desktop-only"
+              aria-hidden="true"
+            ></i>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -79,5 +96,29 @@ const handleScroll = async ({
 #content {
   height: calc(100vh - 60px);
   overflow-y: auto;
+  padding-top: 5px;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 1px solid lightgrey;
+  border-radius: 50px;
+  padding: 5px;
+}
+.input-with-icon input {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+.input-with-icon .fa-times {
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.input-with-icon .fa-search {
+  padding: 0 10px;
 }
 </style>

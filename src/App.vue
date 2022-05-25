@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
 
 import { RouterView } from "vue-router";
 </script>
