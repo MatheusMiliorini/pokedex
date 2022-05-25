@@ -10,7 +10,7 @@ const message = ref("");
 const pokemonList = ref<PokemonData[]>([]);
 
 const searchPokemon = async () => {
-  const data = await PokemonRepository.get(search.value);
+  const data = await PokemonRepository.list(search.value);
   if (data === false || typeof data === "boolean") {
     message.value = "Ocorreu um erro ao buscar os Pokemons";
   } else {

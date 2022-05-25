@@ -7,7 +7,9 @@ import { RouterView } from "vue-router";
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" />
+    <router-link to="/">
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" />
+    </router-link>
   </header>
 
   <div class="container" id="container">

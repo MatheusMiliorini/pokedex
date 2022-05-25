@@ -6,19 +6,14 @@ const BASE_URL = "https://pokeapi.co/api/v2/";
 const SEARCH_LIMIT = 24;
 
 export default {
-  async get(search?: string, page?: number): Promise<boolean | PokemonData[]> {
+  async list(page?: number): Promise<boolean | PokemonData[]> {
     try {
-      const res = await axios.get<PokeApiResponse>(
-        BASE_URL +
-          "pokemon" +
-          (search !== null ? `/${search?.toLowerCase()}` : ""),
-        {
-          params: {
-            limit: SEARCH_LIMIT,
-            offset: (page || 0) * SEARCH_LIMIT,
-          },
-        }
-      );
+      const res = await axios.get<PokeApiResponse>(BASE_URL + "pokemon", {
+        params: {
+          limit: SEARCH_LIMIT,
+          offset: (page || 0) * SEARCH_LIMIT,
+        },
+      });
       const pokemons: PokemonData[] = [];
       await Promise.all(
         res.data.results.map(async (poke) => {
@@ -35,5 +30,10 @@ export default {
       }
       return false;
     }
+  },
+
+  async get(nameOrId: string | number): Promise<PokemonData> {
+    const res = await axios.get<PokemonData>(`${BASE_URL}pokemon/${nameOrId}`);
+    return res.data;
   },
 };
