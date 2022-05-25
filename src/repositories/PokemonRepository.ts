@@ -21,7 +21,9 @@ export default {
           pokemons.push(allPokemonData.data);
         })
       );
-      return pokemons;
+      return pokemons.sort((a, b) => {
+        return a.order < b.order ? -1 : 1;
+      });
     } catch (e) {
       if (e instanceof AxiosError) {
         if (e.response?.status === 404) {
