@@ -6,12 +6,12 @@ const BASE_URL = "https://pokeapi.co/api/v2/";
 const SEARCH_LIMIT = 24;
 
 export default {
-  async list(page?: number): Promise<boolean | PokemonData[]> {
+  async list(offset?: number): Promise<boolean | PokemonData[]> {
     try {
       const res = await axios.get<PokeApiResponse>(BASE_URL + "pokemon", {
         params: {
           limit: SEARCH_LIMIT,
-          offset: (page || 0) * SEARCH_LIMIT,
+          offset: (offset || 0) * SEARCH_LIMIT,
         },
       });
       const pokemons: PokemonData[] = [];

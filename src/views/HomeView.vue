@@ -1,24 +1,29 @@
 <script setup lang="ts">
 import { ref } from "@vue/reactivity";
+import { useRouter } from "vue-router";
 
 import PokemonRepository from "@/repositories/PokemonRepository";
 import type { PokemonData } from "@/interfaces/PokemonData";
 import PokemonCard from "@/components/PokemonCard.vue";
 
+const router = useRouter();
 const search = ref("");
 const message = ref("");
 const pokemonList = ref<PokemonData[]>([]);
 
 const searchPokemon = async () => {
-  const data = await PokemonRepository.list(search.value);
+  const data = await PokemonRepository.list(pokemonList.value.length);
   if (data === false || typeof data === "boolean") {
     message.value = "Ocorreu um erro ao buscar os Pokemons";
   } else {
     pokemonList.value = data;
   }
 };
-
 searchPokemon();
+
+const goToPokemon = () => {
+  router.push(`/${search.value}`);
+};
 </script>
 
 <template>
@@ -32,6 +37,7 @@ searchPokemon();
             placeholder="Pesquise por nome ou código"
             class="form-control rounded-input"
             id="input-search"
+            @change="goToPokemon"
           />
         </div>
       </div>

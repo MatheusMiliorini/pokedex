@@ -77,12 +77,6 @@ const goToDetails = () => {
   gap: 5px;
 }
 
-.back-button {
-  text-align: center;
-  font-weight: 600;
-  margin-top: 50px;
-}
-
 .back-button a {
   text-decoration: none;
 }
